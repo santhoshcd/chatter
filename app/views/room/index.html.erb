@@ -1,20 +1,12 @@
-<h1>Chat room</h1>
-
 <% if current_user.present? %>
   <li>
     <img src="<%= current_user.image_path%>" class="img-circle" alt="Cinque Terre" width="30" height="30">
-    <%= current_user.name %>
-    <%= link_to "Sign out", signout_path, id: "sign_out" %>
   </li>
-  <div id="messages">
-    <%= render @messages%>
-  </div>
-
-  <form>
-    <label>Say somethings</label>
-    <input type="text" data-behavior="room_speaker" />
-  </form>
-
+  <li>
+    <%= current_user.name %>
+  </li>
+  <li><%= link_to "Sign out", signout_path, id: "sign_out" %>
+  </li>
 <% else %>
   <div class="login">
     <div class="content">
@@ -29,4 +21,3 @@
     </div>
   </div>
 <% end %>
-

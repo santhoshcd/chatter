@@ -1,0 +1,21 @@
+git clone project.git
+git remote add origin project.git
+git push origin master
+git pull
+git status
+git commit -m "message"
+git log
+git stash
+git branch new_branch
+git branch
+git checkout 'branch code'
+git merge from
+
+Heroku
+wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+sudo ln -s /usr/local/heroku/bin/heroku /usr/bin/heroku
+git config --list | grep heroku
+
+<a href='/auth/github' class="btn btn-block btn-social btn-github">
+  <span class="fa fa-google"></span> Connect with Github
+</a>

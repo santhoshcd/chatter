@@ -13,7 +13,7 @@ end
 CALLBACK_URL = 'https://dry-beach-68299.herokuapp.com/auth/google_oauth2/callback'
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"], {
-    client_options: {ssl: {ca_file: Rails.root.join("cacert.pem").to_s}},
+    client_options: {ssl: {ca_file: "/usr/lib/ssl/certs/ca-certificates.crt"}},
     scope: 'email profile',
     access_type: 'online',
     setup: (lambda do |env|

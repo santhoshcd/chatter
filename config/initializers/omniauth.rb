@@ -18,7 +18,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     access_type: 'online',
     setup: (lambda do |env|
       request = Rack::Request.new(env)
-      env['omniauth.strategy'].options['token_params'] = {:redirect_uri => CALLBACK_URL }
+      env['omniauth.strategy'].options['token_params'] = {:redirect_uri => CALLBACK_URL}
     end)
 }
 end

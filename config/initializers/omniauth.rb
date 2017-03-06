@@ -10,7 +10,7 @@ end
 #   provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET']
 # end
 
-CALLBACK_URL = 'http://localhost:3000/auth/google_oauth2/callback'
+CALLBACK_URL = 'https://dry-beach-68299.herokuapp.com/auth/google_oauth2/callback'
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"], {
     client_options: {ssl: {ca_file: Rails.root.join("cacert.pem").to_s}},

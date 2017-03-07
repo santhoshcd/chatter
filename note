@@ -19,3 +19,80 @@ git config --list | grep heroku
 <a href='/auth/github' class="btn btn-block btn-social btn-github">
   <span class="fa fa-google"></span> Connect with Github
 </a>
+
+
+
+
+
+
+OmniAuth.config.logger = Rails.logger
+Rails.application.config.middleware.use OmniAuth::Builder do
+  provider :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET']
+end
+# Rails.application.config.middleware.use OmniAuth::Builder do
+#   provider :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"]
+# end
+
+# use OmniAuth::Builder do
+#   provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET']
+# end
+
+
+Rails.application.config.middleware.use OmniAuth::Builder do
+  provider :google_oauth2, '405575424273-n1h5t656r8h91hd4v44j9keph4qq99pl.apps.googleusercontent.com', 'k1TG7wZWw1MfY28_8YOJPzb6', {
+    client_options: {ssl: {ca_file: Rails.root.join("cacert.pem").to_s}},
+    scope: 'email profile',
+    access_type: 'online',
+    setup: (lambda do |env|
+      request = Rack::Request.new(env)
+      env['omniauth.strategy'].options['token_params'] = {:redirect_uri => 'http://localhost:3000/auth/google_oauth2/callback'}
+    end)
+}
+end
+# https://console.developers.google.com/apis/credentials?project=job-for-me
+
+
+
+CALLBACK_URL = 'http://localhost:3000/auth/google_oauth2/callback'
+Rails.application.config.middleware.use OmniAuth::Builder do
+  provider :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"], {
+    client_options: {ssl: {ca_file: Rails.root.join("cacert.pem").to_s}},
+    scope: 'email profile',
+    access_type: 'online',
+    setup: (lambda do |env|
+      request = Rack::Request.new(env)
+      env['omniauth.strategy'].options['token_params'] = {:redirect_uri => CALLBACK_URL}
+    end)
+}
+end
+
+
+
+
+heroku config:set S3_KEY=8N029N81 S3_SECRET=9s83109d3+583493190
+
+
+
+facebook
+
+App Secret
+FACEBOOK_SECRET=d53c03ea5293fad7dd03ca264cbbb107
+App ID
+FACEBOOK_KEY=1929107590659311
+
+
+Google
+GOOGLE_CLIENT_ID=711812676339-tqhlh97ann54job37fp5hvcrks0an37f.apps.googleusercontent.com
+
+
+GOOGLE_CLIENT_SECRET=tZQl2rk-f5WRGRpooRncW5wU
+
+
+
+heroku config:set FACEBOOK_SECRET=d53c03ea5293fad7dd03ca264cbbb107
+heroku config:set FACEBOOK_KEY=1929107590659311
+
+
+heroku config:set GOOGLE_CLIENT_ID=711812676339-tqhlh97ann54job37fp5hvcrks0an37f.apps.googleusercontent.com
+heroku config:set GOOGLE_CLIENT_SECRET=tZQl2rk-f5WRGRpooRncW5wU
+

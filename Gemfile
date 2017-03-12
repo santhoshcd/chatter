@@ -55,5 +55,10 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-github'
 
-ruby "2.3.1"
+gem "twitter-bootstrap-rails"
 
+gem 'bootstrap-social-rails'
+gem 'font-awesome-rails'
+# gem "font-awesome-rails"
+
+ruby "2.3.1"

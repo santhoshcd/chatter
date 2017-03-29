@@ -9,5 +9,6 @@ class RoomController < ApplicationController
   end
   def show
     @messages = Message.all
+    @user = User.all
   end
 end

@@ -8,59 +8,35 @@
   .modal-footer {
       background-color: #f9f9f9;
   }
+  .ScrollStyle{
+    max-height: 500px;
+    overflow-y: scroll;
+    word-wrap: break-word;
+  }
+  .setBorder{
+    border: 1px solid black;
+  }
 </style>
 
 <% if current_user.present? %>
-  <li>
-    <img src="<%= current_user.image_path%>" class="img-circle" alt="Cinque Terre" width="30" height="30">
-    <%= current_user.name %>
-    <%= link_to "Sign out", signout_path, id: "sign_out" %>
-  </li>
-  <div id="messages">
-    <%= render @messages%>
-  </div>
-
-  <form>
-    <label>Say somethings</label>
-    <input type="text" data-behavior="room_speaker" />
-  </form>
-
-<% else %>
-  <div class="container">
-    <h2>Chat Room</h2>
-    <!-- Trigger the modal with a button -->
-    <button type="button" class="btn btn-default btn-lg" id="myBtn">Login</button>
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-      <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4>Chat Room</h4>
-          </div>
-          <div class="modal-body" style="padding:40px 50px;">
-            <form role="form">
-              <a href='/auth/facebook' class="btn btn-block btn-social btn-facebook">
-                <span class="fa fa-facebook"></span> Connect with Facebook
-              </a>
-              <a href='/auth/google_oauth2' class="btn btn-block btn-social btn-google">
-                <span class="fa fa-google"></span> Connect with Google
-              </a>
-            </form>
-          </div>
+  <div class="row setBorder">
+    <div class="col-md-4">
+        <h3>Chat Users</h3>
+        <%= render @user%>
+    </div>
+      <div class="col-md-8">
+      <div class="ScrollStyle">
+        <div id="messages">
+          <%= render @messages%>
         </div>
       </div>
-    </div> 
+      <div>
+        <form>
+          <input type="text" data-behavior="room_speaker" placeholder="Type a message" class="form-control" />
+        </form>
+      </div>
+    </div>
   </div>
-   
-  <script>
-    $(document).ready(function(){
-        $("#myBtn").click(function(){
-            $("#myModal").modal();
-        });
-    });
-    </script>
 <% end %>
 
 

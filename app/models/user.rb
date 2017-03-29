@@ -1,6 +1,9 @@
 class User < ApplicationRecord
+  
   def self.from_omniauth(auth)
-    where(auth.slice(provider: auth.provider, uid: auth.uid)).first_or_initialize.tap do |user|
+    user = User.find_by_provider_and_uid(auth.provider, auth.uid)
+    if user.blank?
+      user = User.new
       user.provider = auth.provider
       user.uid = auth.uid
       user.name = auth.info.name
@@ -10,5 +13,7 @@ class User < ApplicationRecord
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.save!
     end
+    return user    
   end
+
 end
